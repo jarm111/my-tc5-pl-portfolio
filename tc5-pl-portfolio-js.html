@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jarmo Syvälahti" />
+  <meta name="dcterms.date" content="2018-05-03" />
+  <title>TiCorporate5 Product Lab Portfolio</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="pandoc.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">TiCorporate5 Product Lab Portfolio</h1>
+<p class="author">Jarmo Syvälahti</p>
+<p class="date">May 3, 2018</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#preface">Preface</a></li>
+<li><a href="#programming">Programming</a><ul>
+<li><a href="#games-managers-system">Game’s Managers System</a><ul>
+<li><a href="#pausinggamemanagent">PausingGameManagent</a></li>
+<li><a href="#gameovermanagement">GameOverManagement</a></li>
+<li><a href="#playerprefsmanagement">PlayerPrefsManagement</a></li>
+<li><a href="#referencemanagement">ReferenceManagement</a></li>
+<li><a href="#playerinputmanagement">PlayerInputManagement</a></li>
+</ul></li>
+<li><a href="#hud-menu-logic">HUD &amp; Menu Logic</a><ul>
+<li><a href="#playerhealthbarhud">PlayerHealthBarHud</a></li>
+<li><a href="#playerstaminabarhud">PlayerStaminaBarHud</a></li>
+<li><a href="#hudeffects">HudEffects</a></li>
+<li><a href="#pausemenuhud">PauseMenuHud</a></li>
+<li><a href="#gameoverhud">GameOverHud</a></li>
+<li><a href="#main-menu">Main Menu</a></li>
+<li><a href="#story-screens">Story Screens</a></li>
+</ul></li>
+<li><a href="#audio-system-audio-implementation">Audio System &amp; Audio Implementation</a><ul>
+<li><a href="#soundmanagement">SoundManagement</a></li>
+<li><a href="#audio-category-classes">Audio Category classes</a></li>
+<li><a href="#audioclipscontainer">AudioClipsContainer</a></li>
+<li><a href="#objectsaudiosources">ObjectsAudioSources</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+<li><a href="#refactoring-of-players-actions-state-machine">Refactoring of Player’s Actions &amp; State Machine</a><ul>
+<li><a href="#playeridlestate">PlayerIdleState</a></li>
+<li><a href="#playermovement">PlayerMovement</a></li>
+<li><a href="#playerattack">PlayerAttack</a></li>
+<li><a href="#playerattackhitboxes">PlayerAttackHitboxes</a></li>
+</ul></li>
+<li><a href="#refactoring-of-hit-detection-system">Refactoring of Hit Detection System</a><ul>
+<li><a href="#playertakinghit">PlayerTakingHit</a></li>
+<li><a href="#enemyweaponhitdetection">EnemyWeaponHitDetection</a></li>
+<li><a href="#playerweaponhitdetection">PlayerWeaponhitDetection</a></li>
+</ul></li>
+<li><a href="#players-dodge-feature">Player’s Dodge Feature</a><ul>
+<li><a href="#playerdodgestate">PlayerDodgeState</a></li>
+<li><a href="#playerdodge">PlayerDodge</a></li>
+</ul></li>
+<li><a href="#players-stamina-system">Player’s Stamina System</a><ul>
+<li><a href="#playerstamina">PlayerStamina</a></li>
+</ul></li>
+<li><a href="#unit-testing">Unit Testing</a><ul>
+<li><a href="#trackedstat">TrackedStat</a></li>
+<li><a href="#trackedstattests">TrackedStatTests</a></li>
+<li><a href="#afterthought">Afterthought</a></li>
+</ul></li>
+<li><a href="#learning-outcomes">Learning Outcomes</a></li>
+</ul></li>
+<li><a href="#scrum-master">Scrum Master</a><ul>
+<li><a href="#ceremonies-and-artifacts">Ceremonies and Artifacts</a><ul>
+<li><a href="#project-plan">Project Plan</a></li>
+<li><a href="#product-backlog">Product Backlog</a></li>
+<li><a href="#planning-days">Planning Days</a></li>
+<li><a href="#sprint-backlog">Sprint Backlog</a></li>
+<li><a href="#daily-scrums">Daily Scrums</a></li>
+<li><a href="#sprint-demos">Sprint Demos</a></li>
+<li><a href="#retrospectives">Retrospectives</a></li>
+</ul></li>
+<li><a href="#learning-outcomes-1">Learning Outcomes</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="preface">Preface</h1>
+<p>This is a portfolio of my works and experiences in our second year’s spring semester’s TiCorporate5 Product Lab project studies of Business Information Technology in Jyväskylä University of Applied Sciences. The project lasted from January 16th through May 9th, 2018 with three months of actual development. I was part of a game development team “Pakana Games” of six people and my role was one of the three programmers and act as the team’s Scrum Master. In this document, I showcase my works and reflect on what I have learned during the project in which we produced a side-scrolling hack ‘n’ slash game called “Defiler”.</p>
+<h1 id="programming">Programming</h1>
+<p>In the technology side my learning goals for the project were:</p>
+<ul>
+<li>Modular design in a bigger project</li>
+<li>How to write more readable and maintainable code</li>
+<li>Unit Testing in Unity</li>
+</ul>
+<p>In the following chapters, I will cover the main feats I accomplished during the project and sum up what I have learned.</p>
+<h2 id="games-managers-system">Game’s Managers System</h2>
+<p>I designed the general game logic and management system. I have a <em>Managers</em> Prefab that is utilized in the game’s level Scenes. The <em>Managers</em> Prefab has <em>HudManager</em>, <em>LevelManager</em> and <em>AudioManager</em> as it’s child objects which includes scripts associated with the manager’s role. The <em>HudManager</em> and the <em>AudioManager</em> will be covered in chapters related to them.</p>
+<figure>
+<img src="images/managers-prefab.png" alt="The Managers Prefab" /><figcaption>The Managers Prefab</figcaption>
+</figure>
+<p>The <em>LevelManager</em> has the following scripts as it’s responsibilities:</p>
+<ul>
+<li>PausingGameManagement</li>
+<li>GameOverManagement</li>
+<li>EnemyManagement</li>
+<li>PlayerPrefsManagement</li>
+<li>ReferenceManagement</li>
+<li>PlayerInputManagement</li>
+</ul>
+<h3 id="pausinggamemanagent">PausingGameManagent</h3>
+<p><em>PausingGameManagent</em> has this method to handle toggling of Paused state when <em>Pause</em> button is pressed:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">TogglePauseGame</span>()</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    isPaused = !isPaused;</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    GameTimeManagement.<span class="fu">ToggleTime</span>(isPaused);</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="fu">OnGamePaused</span>(isPaused);</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="fu">ToggleActiveScripts</span>(!isPaused);</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">}</a></code></pre></div>
+<h3 id="gameovermanagement">GameOverManagement</h3>
+<p><em>GameOverManagement</em> handles the activation of Game Over state with the following method when <em>PlayerDeath</em> scripts <em>OnPlayerDeath</em> event is triggered:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">EnterGameOver</span>()</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    IsGameOver = <span class="kw">true</span>;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="fu">OnGameOver</span>();</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    GameTimeManagement.<span class="fu">ToggleTime</span>(IsGameOver);</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">}</a></code></pre></div>
+<h3 id="playerprefsmanagement">PlayerPrefsManagement</h3>
+<p><em>PlayerPrefsManagement</em> handles reading and writing of PlayerPrefs settings which we only ended up using for master volume control. It reads the prefs on <em>Start()</em> and Writes them <em>OnSceneUnloaded()</em> and <em>OnApplicationQuit()</em>.</p>
+<p>Here is a snippet of <em>PlayerPrefsManagemet’s</em> <em>ReadPlayerPrefs()</em>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">ReadPlayerPrefs</span>()</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="dt">const</span> <span class="dt">float</span> maxVolume = 1f;</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="kw">if</span> (PlayerPrefs.<span class="fu">HasKey</span>(globalAudioVolume))</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    {</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">        <span class="dt">float</span> volume = PlayerPrefs.<span class="fu">GetFloat</span>(globalAudioVolume);</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">        masterVolumeControl.<span class="fu">SetMasterVolume</span>(volume);</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    }</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    {</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">        masterVolumeControl.<span class="fu">SetMasterVolume</span>(maxVolume);</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">}</a></code></pre></div>
+<h3 id="referencemanagement">ReferenceManagement</h3>
+<p><em>ReferenceManagement</em> is a Singleton object, that holds references to commonly referred GameObjects such as the <em>Player</em> or <em>SoundManagement</em>.</p>
+<p>It uses this method to find the GameObjects where I log an error to the console if the object cannot be found:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">private</span> GameObject <span class="fu">FindGameObject</span>(<span class="dt">string</span> name)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    <span class="dt">var</span> gameObj = GameObject.<span class="fu">Find</span>(name);</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="kw">if</span> (gameObj == <span class="kw">null</span>)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    {</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">        Debug.<span class="fu">LogError</span>(<span class="st">&quot;Cannot find GameObject of name: &quot;</span> + name);</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">    <span class="kw">return</span> gameObj;</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">}</a></code></pre></div>
+<h3 id="playerinputmanagement">PlayerInputManagement</h3>
+<p>Finally <em>PlayerInputManagement</em> handles Input for controlling the Player GameObject and it has auto-implemented properties to contain the state of the inputs.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">Update</span>()</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    Horizontal = Input.<span class="fu">GetAxis</span>(<span class="st">&quot;Horizontal&quot;</span>);</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    Vertical = Input.<span class="fu">GetAxis</span>(<span class="st">&quot;Vertical&quot;</span>);</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">    HorizontalRaw = Input.<span class="fu">GetAxisRaw</span>(<span class="st">&quot;Horizontal&quot;</span>);</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    VerticalRaw = Input.<span class="fu">GetAxisRaw</span>(<span class="st">&quot;Vertical&quot;</span>);</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">    IsAxisInput = (HorizontalRaw != <span class="dv">0</span> || VerticalRaw != <span class="dv">0</span>) ? <span class="kw">true</span> : <span class="kw">false</span>;</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    FastAttack = Input.<span class="fu">GetButtonDown</span>(<span class="st">&quot;FastAttack&quot;</span>);</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    StrongAttack = Input.<span class="fu">GetButtonDown</span>(<span class="st">&quot;StrongAttack&quot;</span>);</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    Block = Input.<span class="fu">GetButton</span>(<span class="st">&quot;Block&quot;</span>);</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    Dodge = Input.<span class="fu">GetButton</span>(<span class="st">&quot;Dodge&quot;</span>);</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">}</a></code></pre></div>
+<h2 id="hud-menu-logic">HUD &amp; Menu Logic</h2>
+<p>I designed implemented almost all of the heads-up display and menu logic. I tried to separate the display of data from the rest of the game logic. My Hud related objects know about the <em>Player</em> and the <em>GameManager</em>, but they only offer the required events that the Hud logic needs to subscribe to.</p>
+<p><em>Managers</em> Prefab’s child <em>HudManager</em> has the following scripts attatched:</p>
+<ul>
+<li>PlayerHealthBarHud</li>
+<li>PlayerStaminaBarHud</li>
+<li>PauseMenuHud</li>
+<li>GameOverHud</li>
+<li>SceneChangeFadeEffect</li>
+<li>ControlMenuHud</li>
+</ul>
+<p>In our game, we have a quite minimalistic HUD, but we have Player’s Health and Stamina Bar visible.</p>
+<figure>
+<img src="images/health-and-stamina-bar.png" alt="The Player’s Health and Stamina Bar" /><figcaption>The Player’s Health and Stamina Bar</figcaption>
+</figure>
+<h3 id="playerhealthbarhud">PlayerHealthBarHud</h3>
+<p><em>PlayerHealthBarHud</em> script gets <em>Player’s</em> maximum and starting health and subscibes to <em>PlayerHealth’s</em> <em>OnHeathChange</em> event.</p>
+<p>This is the method that is called <em>OnHealthChange()</em>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">UpdateHealthBar</span>()</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    playerHealthBarSlider.<span class="fu">value</span> = playerHealth.<span class="fu">CurrentHealth</span>;</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="fu">StartCoroutine</span>(HudEffects.<span class="fu">FadeEffect</span>(healthBarFillImage, fadeEffectTargetFade, fadeEffectRate, initialFade));</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">}</a></code></pre></div>
+<h3 id="playerstaminabarhud">PlayerStaminaBarHud</h3>
+<p><em>PlayerStaminaBarHud</em> script is similar although it has more events it needs to subscribe to which are <em>OnStaminaChange</em>, <em>OnDecreaseStamina</em> and <em>OnNotEnoughStamina</em>.</p>
+<p>These are the methods that are called on those events:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">UpdateStaminaBar</span>()</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    playerStaminaBarSlider.<span class="fu">value</span> = playerStamina.<span class="fu">CurrentStamina</span>;</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">CallStaminaBarFadeEffect</span>()</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">{</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">    <span class="fu">StartCoroutine</span>(HudEffects.<span class="fu">FadeEffect</span>(staminaBarFillImage, staminaBarFillFadeEffectTargetFade, staminaBarFillFadeEffectRate, staminaBarFillInitialFade));</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">CallNotEnoughStaminaFadeEffect</span>()</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">{</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">    <span class="fu">StartCoroutine</span>(HudEffects.<span class="fu">InverseFadeEffect</span>(notEnoughStaminaImage, notEnoughStaminaFadeEffectTargetFade, notEnoughStaminaFadeEffectRate, notEnoughStaminaInitialFade));</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">}</a></code></pre></div>
+<h3 id="hudeffects">HudEffects</h3>
+<p>The effect Coroutines I have in my previously mentioned scripts are located in static <em>HudEffects</em> class.</p>
+<p>Here is an example of one of the effect functions:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">public</span> <span class="kw">static</span> IEnumerator <span class="fu">FadeOutEffect</span>(Image image, <span class="dt">float</span> startingFade, <span class="dt">float</span> fadeEffectRate, <span class="dt">float</span> targetFade)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">    <span class="dt">var</span> color = image.<span class="fu">color</span>;</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    color.<span class="fu">a</span> = startingFade;</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">    image.<span class="fu">color</span> = color;</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">    <span class="kw">while</span> (color.<span class="fu">a</span> &gt;= targetFade)</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">    {</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">        color.<span class="fu">a</span> -= fadeEffectRate * Time.<span class="fu">deltaTime</span>;</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">        image.<span class="fu">color</span> = color;</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">        <span class="kw">yield</span> <span class="kw">return</span> <span class="kw">null</span>;</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">    }</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13">}</a></code></pre></div>
+<p>For example, the Stamina Bar background flashes red when Player doesn’t have enough Stamina to activate certain actions:</p>
+<figure>
+<img src="images/stamina-bar-effect.png" alt="The Player’s Stamina Bar Effect" /><figcaption>The Player’s Stamina Bar Effect</figcaption>
+</figure>
+<h3 id="pausemenuhud">PauseMenuHud</h3>
+<p><em>PauseMenuHud</em> script toggles The Pause Menu on and off based on <em>PausingGameManagements</em> event and handles the actions of button events.</p>
+<figure>
+<img src="images/paused-menu.png" alt="Pause Menu" /><figcaption>Pause Menu</figcaption>
+</figure>
+<p>Here are the events PauseMenuHud subscribes to:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb9-1" data-line-number="1">    continueButton.<span class="fu">onClick</span>.<span class="fu">AddListener</span>(ContinueClick);</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    restartButton.<span class="fu">onClick</span>.<span class="fu">AddListener</span>(RestartClick);</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    returnToMainMenuButton.<span class="fu">onClick</span>.<span class="fu">AddListener</span>(ReturnToMainMenuClick);</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">    controlsButton.<span class="fu">onClick</span>.<span class="fu">AddListener</span>(ToggleControlsMenu);</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    pausingGameManagement.<span class="fu">OnGamePaused</span> += ToggleGamePausedPanel;</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">    audioVolumeSlider.<span class="fu">onValueChanged</span>.<span class="fu">AddListener</span>(<span class="kw">delegate</span> { <span class="fu">AudioVolumeChange</span>(); });</a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">    audioVolumeSlider.<span class="fu">value</span> = masterVolumeControl.<span class="fu">GetMasterVolume</span>();</a></code></pre></div>
+<p>Here are examples of the methods that are triggered by the events:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">ToggleGamePausedPanel</span>(<span class="dt">bool</span> isActive)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    gamePausedPanel.<span class="fu">SetActive</span>(isActive);</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">ContinueClick</span>()</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">{</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">    pausingGameManagement.<span class="fu">TogglePauseGame</span>();</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">RestartClick</span>()</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">{</a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">    SceneLoader.<span class="fu">RestartScene</span>();</a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">}</a></code></pre></div>
+<h3 id="gameoverhud">GameOverHud</h3>
+<p>The <em>GameOverHud</em> is similar to <em>PauseMenuHud</em> but is more simple.</p>
+<figure>
+<img src="images/game-over-menu.png" alt="Game Over Menu" /><figcaption>Game Over Menu</figcaption>
+</figure>
+<h3 id="main-menu">Main Menu</h3>
+<p>For the Main Menu, we have a bit quirky solution of <em>Start Game</em> Button state changing the whole menu graphic, so I can’t use the normal Button functionality that Unity provides.</p>
+<figure>
+<img src="images/main-menu.png" alt="Main Menu’s lights on state active" /><figcaption>Main Menu’s lights on state active</figcaption>
+</figure>
+<p>This is the <em>MainMenuControllers</em> function that is triggered <em>OnMenuButton</em> event of <em>MenuButtonEvents</em> script:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">ChangeMainMenuGraphic</span>(<span class="dt">int</span> state)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="kw">switch</span> (state)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">        <span class="kw">case</span> (<span class="dt">int</span>)ButtonEventsEnum.<span class="fu">Enter</span>:</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">            mainMenuImage.<span class="fu">sprite</span> = mainMenuGraphicsStates[(<span class="dt">int</span>)MenuGraphicStates.<span class="fu">Hover</span>];</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">            audioSources[(<span class="dt">int</span>)MenuButtonSounds.<span class="fu">Move</span>].<span class="fu">Play</span>();</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">        <span class="kw">case</span> (<span class="dt">int</span>)ButtonEventsEnum.<span class="fu">Exit</span>:</a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">            mainMenuImage.<span class="fu">sprite</span> = mainMenuGraphicsStates[(<span class="dt">int</span>)MenuGraphicStates.<span class="fu">Default</span>];</a>
+<a class="sourceLine" id="cb11-11" data-line-number="11">            audioSources[(<span class="dt">int</span>)MenuButtonSounds.<span class="fu">Move</span>].<span class="fu">Play</span>();</a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">        <span class="kw">case</span> (<span class="dt">int</span>)ButtonEventsEnum.<span class="fu">Down</span>:</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14">            mainMenuImage.<span class="fu">sprite</span> = mainMenuGraphicsStates[(<span class="dt">int</span>)MenuGraphicStates.<span class="fu">Pressed</span>];</a>
+<a class="sourceLine" id="cb11-15" data-line-number="15">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb11-16" data-line-number="16">    }</a>
+<a class="sourceLine" id="cb11-17" data-line-number="17">}</a></code></pre></div>
+<p>This is the number of Interfaces I had to implement in MenuButtonEvents to get the functionality that is required:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> MenuButtonEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, ISelectHandler, IDeselectHandler</a></code></pre></div>
+<h3 id="story-screens">Story Screens</h3>
+<p>We have Story Screens between Level Scenes in our game. I designed the logic and functionality of the Story Screens as well.</p>
+<figure>
+<img src="images/story-screen.png" alt="One of the game’s Story Screens" /><figcaption>One of the game’s Story Screens</figcaption>
+</figure>
+<p>The Story Screens are like a slide show that has transition effects. Each screen resides in its own panel in the Story Screen’s Canvas. This is the function that handles changing the screen that is called on <em>AnyKeyDown</em>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">private</span> IEnumerator <span class="fu">showNextFrame</span>()</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">    <span class="dt">var</span> picture = <span class="fu">GetPictureImage</span>();</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    <span class="dt">var</span> text = <span class="fu">GetTextImage</span>();</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="kw">yield</span> <span class="kw">return</span> <span class="fu">StartCoroutine</span>(HudEffects.<span class="fu">FadeOutEffect</span>(picture, visible, pictureFadeRate, invisible));</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">    framePanels[currentFrame].<span class="fu">SetActive</span>(<span class="kw">false</span>);</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">    currentFrame++;</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">    <span class="kw">if</span> (currentFrame &lt; framePanels.<span class="fu">Length</span>)</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">    {</a>
+<a class="sourceLine" id="cb13-14" data-line-number="14">        picture = <span class="fu">GetPictureImage</span>();</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">        text = <span class="fu">GetTextImage</span>();</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb13-17" data-line-number="17">        text.<span class="fu">gameObject</span>.<span class="fu">SetActive</span>(<span class="kw">false</span>);</a>
+<a class="sourceLine" id="cb13-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb13-19" data-line-number="19">        framePanels[currentFrame].<span class="fu">SetActive</span>(<span class="kw">true</span>);</a>
+<a class="sourceLine" id="cb13-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb13-21" data-line-number="21">        <span class="kw">yield</span> <span class="kw">return</span> <span class="fu">StartCoroutine</span>(HudEffects.<span class="fu">FadeInEffect</span>(picture, invisible, pictureFadeRate, visible));</a>
+<a class="sourceLine" id="cb13-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb13-23" data-line-number="23">        text.<span class="fu">gameObject</span>.<span class="fu">SetActive</span>(<span class="kw">true</span>);</a>
+<a class="sourceLine" id="cb13-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb13-25" data-line-number="25">        <span class="kw">yield</span> <span class="kw">return</span> <span class="fu">StartCoroutine</span>(HudEffects.<span class="fu">FadeInEffect</span>(text, invisible, textFadeRate, visible));</a>
+<a class="sourceLine" id="cb13-26" data-line-number="26">    }</a>
+<a class="sourceLine" id="cb13-27" data-line-number="27">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb13-28" data-line-number="28">    {</a>
+<a class="sourceLine" id="cb13-29" data-line-number="29">        SceneLoader.<span class="fu">LoadNextScene</span>();</a>
+<a class="sourceLine" id="cb13-30" data-line-number="30">    }</a>
+<a class="sourceLine" id="cb13-31" data-line-number="31">}</a></code></pre></div>
+<h2 id="audio-system-audio-implementation">Audio System &amp; Audio Implementation</h2>
+<p>I designed a Unity’s Audio Mixer based audio solution for our game that supports positional audio and I also implemented all the audio in our game.</p>
+<p>I have a <em>MasterMixer</em> asset, that is routed to <em>Main Camera’s</em> Audio Listener. <em>MusicMixer</em> and <em>SoundMixer</em> are routed to <em>MasterMixer</em>.</p>
+<figure>
+<img src="images/mixers-setup.png" alt="The Audio Mixers setup" /><figcaption>The Audio Mixers setup</figcaption>
+</figure>
+<h3 id="soundmanagement">SoundManagement</h3>
+<p>Scene’s <em>AudioManager</em> GameObject has <em>Sound Management</em> script that handles playback of audio files and holds references to Audio Clip assets.</p>
+<figure>
+<img src="images/soundmanager-inspector.png" alt="Inspector view of SoundManager" /><figcaption>Inspector view of SoundManager</figcaption>
+</figure>
+<p><em>SoundManagement</em> script has fields for different categories of sounds and a method to play a random variation of a sound from an array of sounds by type eg. <em>PlayerSounds.FastAttackSounds</em>.</p>
+<p><em>SoundManagement’s</em> fields for the category of sounds:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb14-1" data-line-number="1">[SerializeField]</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">private</span> PlayerSounds playerSounds;</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">[SerializeField]</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">private</span> EnemySounds enemySounds;</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">[SerializeField]</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="kw">private</span> LevelSounds levelSounds;</a></code></pre></div>
+<p><em>SoundManagement’s</em> method to play sound:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">PlaySound</span>(AudioClipsContainer clips, GameObject objectWithAudioSourceToPlay)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">    <span class="dt">var</span> source = objectWithAudioSourceToPlay.<span class="fu">GetComponentInChildren</span>&lt;ObjectsAudioSources&gt;()</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">        .<span class="fu">AudioSources</span>[clips.<span class="fu">MixerGroupId</span>];</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    source.<span class="fu">clip</span> = <span class="fu">ReturnRandomAudioClip</span>(clips.<span class="fu">AudioClips</span>);</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">    source.<span class="fu">Play</span>();</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">}</a></code></pre></div>
+<p><em>SoundManagement’s</em> method to return random clip from audio clips array:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">private</span> AudioClip <span class="fu">ReturnRandomAudioClip</span>(<span class="kw">params</span> AudioClip[] clips)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    <span class="co">//Generate a random number between 0 and the length of our array of clips passed in.</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">    <span class="dt">int</span> randomIndex = Random.<span class="fu">Range</span>(<span class="dv">0</span>, clips.<span class="fu">Length</span>);</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">    <span class="kw">return</span> clips[randomIndex];</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">}</a></code></pre></div>
+<h3 id="audio-category-classes">Audio Category classes</h3>
+<p>I have serializable classes for audio categories, this is an example of <em>PlayerSounds</em> class:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb17-1" data-line-number="1">[Serializable]</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">public</span> <span class="kw">class</span> PlayerSounds</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">{</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">    [SerializeField]</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">    <span class="kw">private</span> AudioClipsContainer fastAttackSounds;</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">    [SerializeField]</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">    <span class="kw">private</span> AudioClipsContainer strongAttackSounds;</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">    ...</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb17-11" data-line-number="11">    <span class="co">// read-only properties for the fields...</span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12">}</a></code></pre></div>
+<h3 id="audioclipscontainer">AudioClipsContainer</h3>
+<p>The serializable AudioClipsContainer class holds an id for Mixer Group that the Sound Clip is supposed to be routed to and an array of Audio Clips for variations of the certain type of sound effect:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb18-1" data-line-number="1">[Serializable]</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">public</span> <span class="kw">class</span> AudioClipsContainer </a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">{</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">    [<span class="fu">Tooltip</span>(<span class="st">&quot;Name of the accociated mixer group for the clips&quot;</span>)]</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">    [SerializeField]</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">    <span class="kw">private</span> <span class="dt">string</span> mixerGroupId;</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">    [SerializeField]</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">    <span class="kw">private</span> AudioClip[] audioClips = <span class="kw">new</span> AudioClip[<span class="dv">0</span>];</a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">    <span class="co">// read-only properties for the fields...</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11">}</a></code></pre></div>
+<h3 id="objectsaudiosources">ObjectsAudioSources</h3>
+<p>The GameObjects that have sound effects associated with them hold <em>AudioSources</em> GameObject as a child object. In that object, I have Audio Source components attached to it for each sound type and they are routed to output to correct SoundMixer’s mixer group. For the Level Scenes, sound effects have their spatial blend set to 3D in order to have the sound effects some positional audio feeling.</p>
+<figure>
+<img src="images/players-audio-source.png" alt="Example of Player GameObject’s one AudioSource" /><figcaption>Example of Player GameObject’s one AudioSource</figcaption>
+</figure>
+<p>The <em>AudioSources</em> GameObject also has a <em>ObjectsAudioSources</em> script attached that has a Dictionary to refer the object’s Audio Sources. The keys were automatically created from the Audio Sources’ <em>outputAudioMixerGroup</em> property. This way I could play the correct Audio Clip by the correct Audio Source by coupling them with the Mixer Group’s name as the identifier.</p>
+<p>This is the loop that runs in the <em>ObjectsAudioSources</em> script to add the Dictionary’s keys and values:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">Start</span>()</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="kw">foreach</span>(var audioSource <span class="kw">in</span> GetComponents&lt;AudioSource&gt;())</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">        <span class="dt">var</span> key = audioSource.<span class="fu">outputAudioMixerGroup</span>.<span class="fu">ToString</span>();</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">        <span class="co">// Remove &quot; (UnityEngine.AudioMixerGroup)&quot; from key in build version.</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">        <span class="kw">if</span> (key.<span class="fu">Contains</span>(<span class="st">&quot; &quot;</span>))</a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">        {</a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">            key = key.<span class="fu">Substring</span>(<span class="dv">0</span>, key.<span class="fu">IndexOf</span>(<span class="ch">&#39; &#39;</span>));</a>
+<a class="sourceLine" id="cb19-10" data-line-number="10">        }</a>
+<a class="sourceLine" id="cb19-11" data-line-number="11">        audioSources.<span class="fu">Add</span>(key, audioSource);</a>
+<a class="sourceLine" id="cb19-12" data-line-number="12">    }</a>
+<a class="sourceLine" id="cb19-13" data-line-number="13">}</a></code></pre></div>
+<h3 id="conclusion">Conclusion</h3>
+<p>In the end, I maybe could have simplified the system somewhat by having the actor GameObject to also hold references to its Audio Clips and handle the activation of the sound by itself.</p>
+<h2 id="refactoring-of-players-actions-state-machine">Refactoring of Player’s Actions &amp; State Machine</h2>
+<p>I refactored most of the <em>Player’s</em> logic and all of it’s State Machine code to remove input handling from actions related scripts, to improve modularity and readability, to make the code easier to modify and expand and to remove duplication. Next, I will cover some examples of the code I rewrote.</p>
+<h3 id="playeridlestate">PlayerIdleState</h3>
+<p>This is an example of <em>PlayerIdleState’s</em> <em>UpdateState</em> method. It is one of the larger states along with <em>PlayerMoveState</em>. <em>Player’s</em> State Machine calls actions from action related scripts and changes state based on changes in <em>Player’s</em> actions:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">public</span> <span class="kw">override</span> <span class="dt">void</span> <span class="fu">UpdateState</span>(PlayerFSM owner)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">    <span class="kw">if</span> (owner.<span class="fu">PlayerDeath</span>.<span class="fu">IsDead</span>)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">        owner.<span class="fu">Fsm</span>.<span class="fu">ChangeState</span>(<span class="kw">new</span> <span class="fu">PlayerDeadState</span>());</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">    <span class="kw">else</span> <span class="kw">if</span> (owner.<span class="fu">PlayerStagger</span>.<span class="fu">IsStaggered</span>)</a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">    {</a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">        owner.<span class="fu">Fsm</span>.<span class="fu">ChangeState</span>(<span class="kw">new</span> <span class="fu">PlayerStaggerState</span>());</a>
+<a class="sourceLine" id="cb20-10" data-line-number="10">    }</a>
+<a class="sourceLine" id="cb20-11" data-line-number="11">    <span class="kw">else</span> <span class="kw">if</span> (owner.<span class="fu">PlayerInput</span>.<span class="fu">FastAttack</span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12">        &amp;&amp; owner.<span class="fu">PlayerStamina</span>.<span class="fu">ConsumeStamina</span>(owner.<span class="fu">PlayerStats</span>.<span class="fu">FastAttackStaminaCost</span>))</a>
+<a class="sourceLine" id="cb20-13" data-line-number="13">    {</a>
+<a class="sourceLine" id="cb20-14" data-line-number="14">        owner.<span class="fu">Fsm</span>.<span class="fu">ChangeState</span>(<span class="kw">new</span> <span class="fu">PlayerFastAttackState</span>());</a>
+<a class="sourceLine" id="cb20-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb20-16" data-line-number="16">    <span class="kw">else</span> <span class="kw">if</span> (owner.<span class="fu">PlayerInput</span>.<span class="fu">StrongAttack</span></a>
+<a class="sourceLine" id="cb20-17" data-line-number="17">        &amp;&amp; owner.<span class="fu">PlayerStamina</span>.<span class="fu">ConsumeStamina</span>(owner.<span class="fu">PlayerStats</span>.<span class="fu">StrongAttackStaminaCost</span>))</a>
+<a class="sourceLine" id="cb20-18" data-line-number="18">    {</a>
+<a class="sourceLine" id="cb20-19" data-line-number="19">        owner.<span class="fu">Fsm</span>.<span class="fu">ChangeState</span>(<span class="kw">new</span> <span class="fu">PlayerStrongAttackState</span>());</a>
+<a class="sourceLine" id="cb20-20" data-line-number="20">    }</a>
+<a class="sourceLine" id="cb20-21" data-line-number="21">    <span class="kw">else</span> <span class="kw">if</span> (owner.<span class="fu">PlayerInput</span>.<span class="fu">Block</span> &amp;&amp; !owner.<span class="fu">PlayerBlock</span>.<span class="fu">IsBlockOnCooldown</span></a>
+<a class="sourceLine" id="cb20-22" data-line-number="22">        &amp;&amp; owner.<span class="fu">PlayerStamina</span>.<span class="fu">ConsumeStamina</span>(owner.<span class="fu">PlayerStats</span>.<span class="fu">ActivateBlockStaminaCost</span>))</a>
+<a class="sourceLine" id="cb20-23" data-line-number="23">    {</a>
+<a class="sourceLine" id="cb20-24" data-line-number="24">        owner.<span class="fu">Fsm</span>.<span class="fu">ChangeState</span>(<span class="kw">new</span> <span class="fu">PlayerBlockState</span>());</a>
+<a class="sourceLine" id="cb20-25" data-line-number="25">    }</a>
+<a class="sourceLine" id="cb20-26" data-line-number="26">    <span class="kw">else</span> <span class="kw">if</span> (owner.<span class="fu">PlayerInput</span>.<span class="fu">Dodge</span></a>
+<a class="sourceLine" id="cb20-27" data-line-number="27">        &amp;&amp; owner.<span class="fu">PlayerInput</span>.<span class="fu">IsAxisInput</span></a>
+<a class="sourceLine" id="cb20-28" data-line-number="28">        &amp;&amp; owner.<span class="fu">PlayerStamina</span>.<span class="fu">ConsumeStamina</span>(owner.<span class="fu">PlayerStats</span>.<span class="fu">DodgeStaminaCost</span>))</a>
+<a class="sourceLine" id="cb20-29" data-line-number="29">    {</a>
+<a class="sourceLine" id="cb20-30" data-line-number="30">        owner.<span class="fu">Fsm</span>.<span class="fu">ChangeState</span>(<span class="kw">new</span> <span class="fu">PlayerDodgeState</span>());</a>
+<a class="sourceLine" id="cb20-31" data-line-number="31">    }</a>
+<a class="sourceLine" id="cb20-32" data-line-number="32">    <span class="kw">else</span> <span class="kw">if</span> (owner.<span class="fu">PlayerInput</span>.<span class="fu">IsAxisInput</span>)</a>
+<a class="sourceLine" id="cb20-33" data-line-number="33">    {</a>
+<a class="sourceLine" id="cb20-34" data-line-number="34">        owner.<span class="fu">Fsm</span>.<span class="fu">ChangeState</span>(<span class="kw">new</span> <span class="fu">PlayerWalkState</span>());</a>
+<a class="sourceLine" id="cb20-35" data-line-number="35">    }</a>
+<a class="sourceLine" id="cb20-36" data-line-number="36">}</a></code></pre></div>
+<h3 id="playermovement">PlayerMovement</h3>
+<p><em>PlayerMovement</em> script’s Move() moves Player via ChacterController and updates <em>Player’s</em> direction of facing:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">Move</span>(<span class="dt">float</span> inputX, <span class="dt">float</span> inputY)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">    Vector3 movementDirection = <span class="kw">new</span> <span class="fu">Vector3</span>(inputX, <span class="dv">0</span>, inputY).<span class="fu">normalized</span>;</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">    <span class="dt">float</span> movementSpeed = playerStats.<span class="fu">DefaultWalkSpeed</span>;</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">    characterController.<span class="fu">Move</span>(movementDirection * movementSpeed * Time.<span class="fu">deltaTime</span>);</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">    <span class="fu">SetFacing</span>(inputX);</a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10">    animator.<span class="fu">SetBool</span>(<span class="st">&quot;isWalking&quot;</span>, <span class="kw">true</span>);</a>
+<a class="sourceLine" id="cb21-11" data-line-number="11">}</a></code></pre></div>
+<p><em>PlayerMovement’s</em> <em>SetFacing()</em> flips the sprite, shadow and attack hiboxes position:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">SetFacing</span>(<span class="dt">float</span> inputX)</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">    <span class="dt">bool</span> hasFacingChanged =</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">        ((!isFacingRight &amp;&amp; inputX &gt; <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">        ||</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">        (isFacingRight &amp;&amp; inputX &lt; <span class="dv">0</span>));</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">    <span class="kw">if</span> (hasFacingChanged)</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9">    {</a>
+<a class="sourceLine" id="cb22-10" data-line-number="10">        isFacingRight = !isFacingRight;</a>
+<a class="sourceLine" id="cb22-11" data-line-number="11">        spriteRenderer.<span class="fu">flipX</span> = isFacingRight;</a>
+<a class="sourceLine" id="cb22-12" data-line-number="12">        playerAttackHitboxes.<span class="fu">FlipAttackHitBoxesTowardsFacing</span>();</a>
+<a class="sourceLine" id="cb22-13" data-line-number="13">        shadow.<span class="fu">SetShadowPosition</span>(IsFacingRight);</a>
+<a class="sourceLine" id="cb22-14" data-line-number="14">    }</a>
+<a class="sourceLine" id="cb22-15" data-line-number="15">}</a></code></pre></div>
+<h3 id="playerattack">PlayerAttack</h3>
+<p><em>PlayerAttack</em> script’s <em>FastAttack()</em> activates the correct Fast Attack animation based on <em>ComboState</em>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">FastAttack</span>()</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    <span class="dt">float</span> animationLength = <span class="fu">GetComboAttackLength</span>();</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">    animator.<span class="fu">SetBool</span>(<span class="st">&quot;isFastAttack&quot;</span>, <span class="kw">true</span>);</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">    animator.<span class="fu">SetInteger</span>(<span class="st">&quot;comboState&quot;</span>, (<span class="dt">int</span>)comboState);</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">    <span class="fu">StartCoroutine</span>(<span class="fu">ToggleIsAttackingAfterTime</span>(animationLength));</a>
+<a class="sourceLine" id="cb23-9" data-line-number="9">    <span class="fu">SetComboState</span>();</a>
+<a class="sourceLine" id="cb23-10" data-line-number="10">}</a></code></pre></div>
+<p>This method sets the <em>ComboState</em> that determines which attack is executed when player presses <em>FastAttack</em> Button:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">SetComboState</span>()</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">    <span class="kw">switch</span> (comboState)</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">        <span class="kw">case</span> ComboStates.<span class="fu">FastAttack</span>:</a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">            resetComboStateRoutine = <span class="fu">StartCoroutine</span>(<span class="fu">ResetComboStateAfterTime</span>());</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">            comboState++;</a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb24-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb24-10" data-line-number="10">        <span class="kw">case</span> ComboStates.<span class="fu">ComboAttack1</span>:</a>
+<a class="sourceLine" id="cb24-11" data-line-number="11">            comboState++;</a>
+<a class="sourceLine" id="cb24-12" data-line-number="12">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb24-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb24-14" data-line-number="14">        <span class="kw">case</span> ComboStates.<span class="fu">ComboAttack2</span>:</a>
+<a class="sourceLine" id="cb24-15" data-line-number="15">            <span class="fu">StopCoroutine</span>(resetComboStateRoutine);</a>
+<a class="sourceLine" id="cb24-16" data-line-number="16">            comboState = ComboStates.<span class="fu">FastAttack</span>;</a>
+<a class="sourceLine" id="cb24-17" data-line-number="17">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb24-18" data-line-number="18">    }</a>
+<a class="sourceLine" id="cb24-19" data-line-number="19">}</a></code></pre></div>
+<h3 id="playerattackhitboxes">PlayerAttackHitboxes</h3>
+<p><em>PlayerAttackHitboxes</em> script handles the references to attack hitboxes, triggering them from attack animations, deactivating them after a short time and flipping them based on facing.</p>
+<p>This method gets the references:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">GetReferenceToAttackHitboxes</span>()</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">    <span class="dt">int</span> amountOfAttackHitboxes = Enum.<span class="fu">GetNames</span>(<span class="kw">typeof</span>(PlayerAttack.<span class="fu">PlayerAttackTypes</span>)).<span class="fu">Length</span>;</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">    attackHitboxes = <span class="kw">new</span> GameObject[amountOfAttackHitboxes];</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; amountOfAttackHitboxes; i++)</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">    {</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">        attackHitboxes[i] = gameObject.<span class="fu">transform</span>.<span class="fu">GetChild</span>(i).<span class="fu">gameObject</span>;</a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">    }</a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">}</a></code></pre></div>
+<p>This method flips the attack hitboxes towards facing:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">FlipAttackHitBoxesTowardsFacing</span>()</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">    <span class="dt">const</span> <span class="dt">float</span> changeSign = <span class="dv">-1</span>;</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">    <span class="kw">foreach</span> (var hitbox <span class="kw">in</span> attackHitboxes)</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">    {</a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">        <span class="dt">var</span> pos = hitbox.<span class="fu">transform</span>.<span class="fu">localPosition</span>;</a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb26-9" data-line-number="9">        hitbox.<span class="fu">transform</span>.<span class="fu">localPosition</span> = <span class="kw">new</span> <span class="fu">Vector3</span>(pos.<span class="fu">x</span> * changeSign, pos.<span class="fu">y</span>, pos.<span class="fu">z</span>);</a>
+<a class="sourceLine" id="cb26-10" data-line-number="10">    }</a>
+<a class="sourceLine" id="cb26-11" data-line-number="11">}</a></code></pre></div>
+<h2 id="refactoring-of-hit-detection-system">Refactoring of Hit Detection System</h2>
+<p>I refactored the Player’s and enemies’ hitting and getting hit mechanics. Before the refactoring the logic was spread out to different places, Player’s getting hit logic was handled in Enemy’s code and vice versa. I centralized the decision making and redid the sharing of responsibility.</p>
+<h3 id="playertakinghit">PlayerTakingHit</h3>
+<p><em>PlayerTakingHit</em> script handles hits that an enemy registers on <em>Player</em>. <em>EnemyWeaponHitDetection</em> script calls this method from <em>PlayerTakingHit</em>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">TakeHit</span>(<span class="dt">float</span> hitterPositionX, <span class="dt">int</span> damage, <span class="dt">float</span> damageReductionModifier, <span class="kw">out</span> <span class="dt">bool</span> isTimedBlocked)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">    <span class="dt">const</span> <span class="dt">int</span> damageWhenTimedBlocked = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">    <span class="dt">var</span> playerBlock = GetComponent&lt;PlayerBlock&gt;();</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">    <span class="dt">var</span> playerDodge = GetComponent&lt;PlayerDodge&gt;();</a>
+<a class="sourceLine" id="cb27-7" data-line-number="7">    <span class="dt">bool</span> isFrontalStrike = <span class="fu">CheckIsFrontalStrike</span>(hitterPositionX);</a>
+<a class="sourceLine" id="cb27-8" data-line-number="8">    <span class="dt">int</span> damageDealt = damage;</a>
+<a class="sourceLine" id="cb27-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb27-10" data-line-number="10">    isTimedBlocked = <span class="kw">false</span>;</a>
+<a class="sourceLine" id="cb27-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb27-12" data-line-number="12">    <span class="kw">if</span> (isTakeHitDisabled || playerDodge.<span class="fu">IsInvulnerable</span>)</a>
+<a class="sourceLine" id="cb27-13" data-line-number="13">    {</a>
+<a class="sourceLine" id="cb27-14" data-line-number="14">        <span class="kw">return</span>;</a>
+<a class="sourceLine" id="cb27-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb27-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb27-17" data-line-number="17">    <span class="kw">if</span> (playerBlock.<span class="fu">IsBlockingActive</span> &amp;&amp; isFrontalStrike)</a>
+<a class="sourceLine" id="cb27-18" data-line-number="18">    {</a>
+<a class="sourceLine" id="cb27-19" data-line-number="19">        <span class="kw">if</span> (playerBlock.<span class="fu">IsTimedBlockActive</span>)</a>
+<a class="sourceLine" id="cb27-20" data-line-number="20">        {</a>
+<a class="sourceLine" id="cb27-21" data-line-number="21">            damageDealt = damageWhenTimedBlocked;</a>
+<a class="sourceLine" id="cb27-22" data-line-number="22">            isTimedBlocked = <span class="kw">true</span>;</a>
+<a class="sourceLine" id="cb27-23" data-line-number="23">        }</a>
+<a class="sourceLine" id="cb27-24" data-line-number="24">        <span class="kw">else</span></a>
+<a class="sourceLine" id="cb27-25" data-line-number="25">        {</a>
+<a class="sourceLine" id="cb27-26" data-line-number="26">            damageDealt = (<span class="dt">int</span>)(damage * damageReductionModifier);</a>
+<a class="sourceLine" id="cb27-27" data-line-number="27">            GetComponent&lt;PlayerStamina&gt;().<span class="fu">DecreaseStamina</span>(GetComponent&lt;PlayerStats&gt;().<span class="fu">BlockAttackStaminaCost</span>);</a>
+<a class="sourceLine" id="cb27-28" data-line-number="28">        }</a>
+<a class="sourceLine" id="cb27-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb27-30" data-line-number="30">        GetComponent&lt;SparkEffect&gt;().<span class="fu">Spark</span>();</a>
+<a class="sourceLine" id="cb27-31" data-line-number="31">        soundManagement.<span class="fu">PlaySound</span>(soundManagement.<span class="fu">PlayerSounds</span>.<span class="fu">BlockParrySound</span>, gameObject);</a>
+<a class="sourceLine" id="cb27-32" data-line-number="32">    }</a>
+<a class="sourceLine" id="cb27-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb27-34" data-line-number="34">    <span class="kw">if</span> (damageDealt &gt; <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb27-35" data-line-number="35">    {</a>
+<a class="sourceLine" id="cb27-36" data-line-number="36">        particle.<span class="fu">Play</span>();</a>
+<a class="sourceLine" id="cb27-37" data-line-number="37">        GetComponent&lt;PlayerHealth&gt;().<span class="fu">DecreaseHealth</span>(damageDealt);</a>
+<a class="sourceLine" id="cb27-38" data-line-number="38">        GetComponent&lt;PlayerStagger&gt;().<span class="fu">PlayerTakesHit</span>();</a>
+<a class="sourceLine" id="cb27-39" data-line-number="39">        soundManagement.<span class="fu">PlaySound</span>(soundManagement.<span class="fu">PlayerSounds</span>.<span class="fu">TakingHitSounds</span>, gameObject);</a>
+<a class="sourceLine" id="cb27-40" data-line-number="40">    }</a>
+<a class="sourceLine" id="cb27-41" data-line-number="41">}</a></code></pre></div>
+<p>This is the method that checks whether a hit comes from front or back:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">private</span> <span class="dt">bool</span> <span class="fu">CheckIsFrontalStrike</span>(<span class="dt">float</span> opponentPositionX)</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="dt">bool</span> playerIsFacingRight = GetComponent&lt;PlayerMovement&gt;().<span class="fu">IsFacingRight</span>;</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">    <span class="dt">float</span> playerPositionX = gameObject.<span class="fu">transform</span>.<span class="fu">position</span>.<span class="fu">x</span>;</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">    <span class="kw">return</span> playerPositionX &lt; opponentPositionX</a>
+<a class="sourceLine" id="cb28-7" data-line-number="7">        &amp;&amp; playerIsFacingRight</a>
+<a class="sourceLine" id="cb28-8" data-line-number="8">        || playerPositionX &gt; opponentPositionX</a>
+<a class="sourceLine" id="cb28-9" data-line-number="9">        &amp;&amp; !playerIsFacingRight;</a>
+<a class="sourceLine" id="cb28-10" data-line-number="10">}</a></code></pre></div>
+<h3 id="enemyweaponhitdetection">EnemyWeaponHitDetection</h3>
+<p><em>EnemyWeaponHitDetection</em> script that is attatched to enemy’s weapon hitbox detects hit on <em>Player</em> and calls <em>PlayerTakingHit’s</em> <em>TakeHit()</em>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">OnTriggerEnter</span>(Collider other)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">    <span class="kw">if</span> (other.<span class="fu">CompareTag</span>(<span class="st">&quot;Player&quot;</span>))</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">        <span class="dt">bool</span> isEnemyBlockedWithTimedBlock;</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">        <span class="dt">var</span> playerTakingHit = other.<span class="fu">GetComponent</span>&lt;PlayerTakingHit&gt;();</a>
+<a class="sourceLine" id="cb29-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb29-8" data-line-number="8">        playerTakingHit.<span class="fu">TakeHit</span>(</a>
+<a class="sourceLine" id="cb29-9" data-line-number="9">            enemy.<span class="fu">transform</span>.<span class="fu">position</span>.<span class="fu">x</span>,</a>
+<a class="sourceLine" id="cb29-10" data-line-number="10">            attackDamageTypes[(<span class="dt">int</span>)attackDamageType],</a>
+<a class="sourceLine" id="cb29-11" data-line-number="11">            enemyStats.<span class="fu">DamageReductionModifier</span>,</a>
+<a class="sourceLine" id="cb29-12" data-line-number="12">            <span class="kw">out</span> isEnemyBlockedWithTimedBlock);</a>
+<a class="sourceLine" id="cb29-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb29-14" data-line-number="14">        <span class="kw">if</span> (isEnemyBlockedWithTimedBlock)</a>
+<a class="sourceLine" id="cb29-15" data-line-number="15">        {</a>
+<a class="sourceLine" id="cb29-16" data-line-number="16">            enemy.<span class="fu">GetComponent</span>&lt;EnemyStun&gt;().<span class="fu">Stun</span>(<span class="kw">true</span>);</a>
+<a class="sourceLine" id="cb29-17" data-line-number="17">        }</a>
+<a class="sourceLine" id="cb29-18" data-line-number="18">    }</a>
+<a class="sourceLine" id="cb29-19" data-line-number="19">}</a></code></pre></div>
+<h3 id="playerweaponhitdetection">PlayerWeaponhitDetection</h3>
+<p>For <em>Player’s</em> <em>PlayerWeaponhitDetection</em> I serialized <em>PlayerAttack.PlayerAttackTypes</em> enum field to show in inspector. This way I can use the same script for each of the <em>Player’s</em> attack hitbox GameObjects to get the correct damage amount.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb30-1" data-line-number="1">    [SerializeField]</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">    <span class="kw">private</span> PlayerAttack.<span class="fu">PlayerAttackTypes</span> attackType;</a></code></pre></div>
+<p><em>PlayerWeaponHitDetection</em> detects hits on enemies and destroyable barriers:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">OnTriggerEnter</span>(Collider coll)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">    <span class="dt">bool</span> isEnemy = coll.<span class="fu">CompareTag</span>(<span class="st">&quot;Enemy&quot;</span>);</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">    <span class="dt">bool</span> isBarrier = coll.<span class="fu">CompareTag</span>(<span class="st">&quot;Barrier&quot;</span>);</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">    <span class="kw">if</span> (isEnemy || isBarrier)</a>
+<a class="sourceLine" id="cb31-7" data-line-number="7">    {</a>
+<a class="sourceLine" id="cb31-8" data-line-number="8">        <span class="dt">int</span> attackDamage = <span class="fu">GetAttackDamage</span>();</a>
+<a class="sourceLine" id="cb31-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb31-10" data-line-number="10">        <span class="kw">if</span> (isEnemy)</a>
+<a class="sourceLine" id="cb31-11" data-line-number="11">        {</a>
+<a class="sourceLine" id="cb31-12" data-line-number="12">            <span class="dt">var</span> enemyTakingHit = coll.<span class="fu">GetComponent</span>&lt;EnemyTakingHit&gt;();</a>
+<a class="sourceLine" id="cb31-13" data-line-number="13">            <span class="dt">bool</span> isStrongAttack = (attackType == PlayerAttack.<span class="fu">PlayerAttackTypes</span>.<span class="fu">StrongAttack</span>);</a>
+<a class="sourceLine" id="cb31-14" data-line-number="14">            <span class="dt">float</span> playerX = transform.<span class="fu">parent</span>.<span class="fu">position</span>.<span class="fu">x</span>;</a>
+<a class="sourceLine" id="cb31-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb31-16" data-line-number="16">            enemyTakingHit.<span class="fu">TakeHit</span>(attackDamage, isStrongAttack, playerX);</a>
+<a class="sourceLine" id="cb31-17" data-line-number="17">        }</a>
+<a class="sourceLine" id="cb31-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb31-19" data-line-number="19">        <span class="kw">if</span> (isBarrier)</a>
+<a class="sourceLine" id="cb31-20" data-line-number="20">        {</a>
+<a class="sourceLine" id="cb31-21" data-line-number="21">            <span class="dt">var</span> barrier = coll.<span class="fu">GetComponent</span>&lt;Barrier&gt;();</a>
+<a class="sourceLine" id="cb31-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb31-23" data-line-number="23">            barrier.<span class="fu">TakeHit</span>(attackDamage);</a>
+<a class="sourceLine" id="cb31-24" data-line-number="24">        }</a>
+<a class="sourceLine" id="cb31-25" data-line-number="25">    }</a>
+<a class="sourceLine" id="cb31-26" data-line-number="26">}</a></code></pre></div>
+<p><em>PlayerWeaponHitDetection’s</em> <em>GetAttackDamage()</em> returns the dealt damage amount based on the attack type:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">private</span> <span class="dt">int</span> <span class="fu">GetAttackDamage</span>()</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">    <span class="dt">int</span> damage = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">    <span class="kw">switch</span> (attackType)</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">    {</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">        <span class="kw">case</span> PlayerAttack.<span class="fu">PlayerAttackTypes</span>.<span class="fu">FastAttack</span>:</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">            damage = playerStats.<span class="fu">FastAttackPower</span>;</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb32-10" data-line-number="10">        <span class="kw">case</span> PlayerAttack.<span class="fu">PlayerAttackTypes</span>.<span class="fu">ComboAttack1</span>:</a>
+<a class="sourceLine" id="cb32-11" data-line-number="11">            damage = playerStats.<span class="fu">ComboAttack1Power</span>;</a>
+<a class="sourceLine" id="cb32-12" data-line-number="12">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb32-13" data-line-number="13">        <span class="kw">case</span> PlayerAttack.<span class="fu">PlayerAttackTypes</span>.<span class="fu">ComboAttack2</span>:</a>
+<a class="sourceLine" id="cb32-14" data-line-number="14">            damage = playerStats.<span class="fu">ComboAttack2Power</span>;</a>
+<a class="sourceLine" id="cb32-15" data-line-number="15">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb32-16" data-line-number="16">        <span class="kw">case</span> PlayerAttack.<span class="fu">PlayerAttackTypes</span>.<span class="fu">StrongAttack</span>:</a>
+<a class="sourceLine" id="cb32-17" data-line-number="17">            damage = playerStats.<span class="fu">StrongAttackPower</span>;</a>
+<a class="sourceLine" id="cb32-18" data-line-number="18">            <span class="kw">break</span>;</a>
+<a class="sourceLine" id="cb32-19" data-line-number="19">    }</a>
+<a class="sourceLine" id="cb32-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb32-21" data-line-number="21">    <span class="kw">return</span> damage;</a>
+<a class="sourceLine" id="cb32-22" data-line-number="22">}</a></code></pre></div>
+<h2 id="players-dodge-feature">Player’s Dodge Feature</h2>
+<p>I designed and implemented <em>Player’s</em> <em>Dodge</em> feature. A player can execute a dodge movement in any direction by pressing both <em>Dodge</em> Button and giving directional input which moves the <em>Player</em> in that direction with given speed for the length of the animation. The movement is triggered inside dodge animation. The <em>Player</em> is invulnerable during the dodge movement period which gives player better survivability against enemy attacks.</p>
+<figure>
+<img src="images/player-dodge-move.png" alt="Player’s Dodge movement" /><figcaption>Player’s Dodge movement</figcaption>
+</figure>
+<p>In <em>PlayerDodge</em> script there are methods for horizontal and vertical dodge movement. Which one is called is decided in <em>PlayerDodgeState</em>.</p>
+<h3 id="playerdodgestate">PlayerDodgeState</h3>
+<p>This is <em>PlayerDodgeState’s</em> <em>EnterState</em>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">public</span> <span class="kw">override</span> <span class="dt">void</span> <span class="fu">EnterState</span>(PlayerFSM owner)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">    <span class="dt">float</span> horizontalDirection = owner.<span class="fu">PlayerInput</span>.<span class="fu">HorizontalRaw</span>;</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">    <span class="dt">float</span> verticalDirection = owner.<span class="fu">PlayerInput</span>.<span class="fu">VerticalRaw</span>;</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">    <span class="kw">if</span> (horizontalDirection != <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">    {</a>
+<a class="sourceLine" id="cb33-8" data-line-number="8">        owner.<span class="fu">PlayerDodge</span>.<span class="fu">DodgeHorizontal</span>(horizontalDirection, verticalDirection);</a>
+<a class="sourceLine" id="cb33-9" data-line-number="9">    }</a>
+<a class="sourceLine" id="cb33-10" data-line-number="10">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb33-11" data-line-number="11">    {</a>
+<a class="sourceLine" id="cb33-12" data-line-number="12">        owner.<span class="fu">PlayerDodge</span>.<span class="fu">DodgeVertical</span>(verticalDirection);</a>
+<a class="sourceLine" id="cb33-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb33-14" data-line-number="14">}</a></code></pre></div>
+<h3 id="playerdodge">PlayerDodge</h3>
+<p>Here is an example of <em>PlayerDodge</em> script’s <em>DodgeHorizontal()</em>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">DodgeHorizontal</span>(<span class="dt">float</span> horizontalDirection, <span class="dt">float</span> verticalDirection)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">    dodgeDirection = <span class="kw">new</span> <span class="fu">Vector3</span>(horizontalDirection, <span class="dv">0</span>, verticalDirection).<span class="fu">normalized</span>;</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">    <span class="dt">bool</span> isDodgingForward = (playerMovement.<span class="fu">IsFacingRight</span> &amp;&amp; horizontalDirection &gt; <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">        || (!playerMovement.<span class="fu">IsFacingRight</span> &amp;&amp; horizontalDirection &lt; <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">    <span class="dt">float</span> animationLength;</a>
+<a class="sourceLine" id="cb34-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb34-8" data-line-number="8">    <span class="kw">if</span> (isDodgingForward)</a>
+<a class="sourceLine" id="cb34-9" data-line-number="9">    {</a>
+<a class="sourceLine" id="cb34-10" data-line-number="10">        animator.<span class="fu">SetTrigger</span>(<span class="st">&quot;triggerDodgeForward&quot;</span>);</a>
+<a class="sourceLine" id="cb34-11" data-line-number="11">        animationLength = dodgeAnimations[(<span class="dt">int</span>)DodgeAnimations.<span class="fu">Forward</span>].<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb34-12" data-line-number="12">    }</a>
+<a class="sourceLine" id="cb34-13" data-line-number="13">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb34-14" data-line-number="14">    {</a>
+<a class="sourceLine" id="cb34-15" data-line-number="15">        animator.<span class="fu">SetTrigger</span>(<span class="st">&quot;triggerDodgeBackward&quot;</span>);</a>
+<a class="sourceLine" id="cb34-16" data-line-number="16">        animationLength = dodgeAnimations[(<span class="dt">int</span>)DodgeAnimations.<span class="fu">Backward</span>].<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb34-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb34-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb34-19" data-line-number="19">    <span class="fu">StartCoroutine</span>(<span class="fu">ToggleIsDodgeActiveAfterTime</span>(animationLength));</a>
+<a class="sourceLine" id="cb34-20" data-line-number="20">}</a></code></pre></div>
+<p>This Coroutine moves the <em>Player</em> during the animation. It is activated from animation:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">private</span> IEnumerator <span class="fu">DodgeMove</span>()</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">    <span class="fu">StartCoroutine</span>(<span class="fu">ToggleInvulnerabilityAfterTime</span>());</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">    <span class="kw">while</span> (IsDodgeActive)</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">    {</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">        characterController.<span class="fu">Move</span>(dodgeDirection * playerStats.<span class="fu">DodgeSpeed</span> * Time.<span class="fu">deltaTime</span>);</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">        <span class="kw">yield</span> <span class="kw">return</span> <span class="kw">null</span>;</a>
+<a class="sourceLine" id="cb35-9" data-line-number="9">    }</a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">}</a></code></pre></div>
+<h2 id="players-stamina-system">Player’s Stamina System</h2>
+<p>I designed and implemented <em>Player’s</em> <em>Stamina</em> system. <em>Player’s</em> attacks, dodge and blocking attacks consume stamina which regenerates at certain rate except when <em>Player</em> is blocking.</p>
+<h3 id="playerstamina">PlayerStamina</h3>
+<p><em>PlayerStamina</em> script’s <em>ConsumeStamina()</em> is used in <em>Player’s</em> State Machine state change checks. It returns if the <em>Player</em> has enough stamina to use the action and decreases <em>Player’s</em> stamina by the cost if the <em>Player</em> has enough stamina.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">public</span> <span class="dt">bool</span> <span class="fu">ConsumeStamina</span>(<span class="dt">int</span> staminaCost)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">    <span class="dt">bool</span> hasEnoughStamina = staminaCost &lt;= stamina.<span class="fu">CurrentValue</span>;</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">    <span class="kw">if</span> (hasEnoughStamina)</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">    {</a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">        <span class="fu">DecreaseStamina</span>(staminaCost);</a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb36-10" data-line-number="10">    {</a>
+<a class="sourceLine" id="cb36-11" data-line-number="11">        soundManagement.<span class="fu">PlaySound</span>(soundManagement.<span class="fu">PlayerSounds</span>.<span class="fu">NotEnoughStaminaVoice</span>, gameObject);</a>
+<a class="sourceLine" id="cb36-12" data-line-number="12">        <span class="fu">OnNotEnoughStamina</span>();</a>
+<a class="sourceLine" id="cb36-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb36-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb36-15" data-line-number="15">    <span class="kw">return</span> hasEnoughStamina;</a>
+<a class="sourceLine" id="cb36-16" data-line-number="16">}</a></code></pre></div>
+<p>The stamina regens at certain intervals. If stamina regen is active, <em>RegenStamina()</em> is called in <em>Update()</em>:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">Update</span>()</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">    <span class="kw">if</span>(isStaminaRegenActive)</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">        <span class="fu">RegenStamina</span>();</a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb37-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb37-9" data-line-number="9"><span class="kw">private</span> <span class="dt">void</span> <span class="fu">RegenStamina</span>()</a>
+<a class="sourceLine" id="cb37-10" data-line-number="10">{</a>
+<a class="sourceLine" id="cb37-11" data-line-number="11">    timer += Time.<span class="fu">deltaTime</span>;</a>
+<a class="sourceLine" id="cb37-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb37-13" data-line-number="13">    <span class="kw">if</span> (timer &gt; regenStaminaInterval)</a>
+<a class="sourceLine" id="cb37-14" data-line-number="14">    {</a>
+<a class="sourceLine" id="cb37-15" data-line-number="15">        timer -= regenStaminaInterval;</a>
+<a class="sourceLine" id="cb37-16" data-line-number="16">        <span class="fu">IncreaseStamina</span>((<span class="dt">int</span>)(staminaGainPerSecond * regenStaminaInterval));</a>
+<a class="sourceLine" id="cb37-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb37-18" data-line-number="18">}</a></code></pre></div>
+<h2 id="unit-testing">Unit Testing</h2>
+<p>I wrote a small <em>TrackedStat</em> class that I use in <em>Health</em> and <em>PlayerStamina</em> scripts to store the maximum and current values of those stats. I practiced Unit Testing with Unity by writing tests for the <em>TrackedStat</em> class by using the NUnit test framework.</p>
+<h3 id="trackedstat">TrackedStat</h3>
+<p>Here are the Constructor(), <em>IncreaseValue()</em> and <em>DecreaseValue()</em> of that class:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">public</span> <span class="fu">TrackedStat</span>(<span class="dt">int</span> startingValue, <span class="dt">int</span> startingMaxValue)</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">    currentValue = Mathf.<span class="fu">Clamp</span>(startingValue, <span class="dv">0</span>, startingMaxValue);</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">    maxValue = (startingMaxValue &gt;= <span class="dv">0</span>) ? startingMaxValue : <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">IncreaseValue</span>(<span class="dt">int</span> amount)</a>
+<a class="sourceLine" id="cb38-8" data-line-number="8">{</a>
+<a class="sourceLine" id="cb38-9" data-line-number="9">    currentValue += (currentValue + amount &lt;= maxValue) ?</a>
+<a class="sourceLine" id="cb38-10" data-line-number="10">        amount : maxValue - currentValue;</a>
+<a class="sourceLine" id="cb38-11" data-line-number="11">}</a>
+<a class="sourceLine" id="cb38-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb38-13" data-line-number="13"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">DecreaseValue</span>(<span class="dt">int</span> amount)</a>
+<a class="sourceLine" id="cb38-14" data-line-number="14">{</a>
+<a class="sourceLine" id="cb38-15" data-line-number="15">    currentValue -= (currentValue - amount &gt;= <span class="dv">0</span>) ?</a>
+<a class="sourceLine" id="cb38-16" data-line-number="16">        amount : Mathf.<span class="fu">Abs</span>(<span class="dv">0</span> - currentValue);</a>
+<a class="sourceLine" id="cb38-17" data-line-number="17">}</a></code></pre></div>
+<h3 id="trackedstattests">TrackedStatTests</h3>
+<p>Here are the test results from running the <em>TrackedStatTests</em> from Unity’s Test Runner:</p>
+<figure>
+<img src="images/test-runner.png" alt="Test Runner results" /><figcaption>Test Runner results</figcaption>
+</figure>
+<p>Here is the setup and couple of the test cases:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cs"><code class="sourceCode cs"><a class="sourceLine" id="cb39-1" data-line-number="1">[SetUp]</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">SetUp</span>()</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">{</a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">    trackedStat = <span class="kw">new</span> <span class="fu">TrackedStat</span>(startingValue, maxValue);</a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb39-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb39-7" data-line-number="7">[<span class="fu">TestCase</span>(<span class="dv">101</span>, <span class="dv">0</span>)]</a>
+<a class="sourceLine" id="cb39-8" data-line-number="8">[<span class="fu">TestCase</span>(<span class="dv">110</span>, <span class="dv">0</span>)]</a>
+<a class="sourceLine" id="cb39-9" data-line-number="9">[<span class="fu">TestCase</span>(<span class="dv">150</span>, <span class="dv">0</span>)]</a>
+<a class="sourceLine" id="cb39-10" data-line-number="10"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">CurrentValueCannotFallBelowZero</span>(<span class="dt">int</span> decreaseAmount, <span class="dt">int</span> expectedValue)</a>
+<a class="sourceLine" id="cb39-11" data-line-number="11">{</a>
+<a class="sourceLine" id="cb39-12" data-line-number="12">    trackedStat.<span class="fu">DecreaseValue</span>(decreaseAmount);</a>
+<a class="sourceLine" id="cb39-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb39-14" data-line-number="14">    Assert.<span class="fu">That</span>(trackedStat.<span class="fu">CurrentValue</span>, Is.<span class="fu">EqualTo</span>(expectedValue));</a>
+<a class="sourceLine" id="cb39-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb39-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb39-17" data-line-number="17">[<span class="fu">TestCase</span>(<span class="dv">101</span>, <span class="dv">100</span>)]</a>
+<a class="sourceLine" id="cb39-18" data-line-number="18">[<span class="fu">TestCase</span>(<span class="dv">120</span>, <span class="dv">100</span>)]</a>
+<a class="sourceLine" id="cb39-19" data-line-number="19">[<span class="fu">TestCase</span>(<span class="dv">3000</span>, <span class="dv">100</span>)]</a>
+<a class="sourceLine" id="cb39-20" data-line-number="20"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">CannotInitializeCurrentValueAboveMaxValue</span>(<span class="dt">int</span> startingValue, <span class="dt">int</span> maxValue)</a>
+<a class="sourceLine" id="cb39-21" data-line-number="21">{</a>
+<a class="sourceLine" id="cb39-22" data-line-number="22">    trackedStat = <span class="kw">new</span> <span class="fu">TrackedStat</span>(startingValue, maxValue);</a>
+<a class="sourceLine" id="cb39-23" data-line-number="23">    <span class="dt">int</span> expected = maxValue;</a>
+<a class="sourceLine" id="cb39-24" data-line-number="24">    Assert.<span class="fu">That</span>(trackedStat.<span class="fu">CurrentValue</span>, Is.<span class="fu">EqualTo</span>(expected));</a>
+<a class="sourceLine" id="cb39-25" data-line-number="25">}</a></code></pre></div>
+<h3 id="afterthought">Afterthought</h3>
+<p>I think we should have covered more of our logic and math code with unit tests, but I found it difficult to test Monobehaviours that were dependant on other Monobehaviours. This perhaps was a sign of design flaws in our system.</p>
+<h2 id="learning-outcomes">Learning Outcomes</h2>
+<p>My learning outcomes considering programming were:</p>
+<ul>
+<li>I learned to solve many typical game programming problems and implement common games related systems.</li>
+<li>My code reading speed increased by going through tens of merge requests.</li>
+<li>My code production speed increased by writing quite a bit of production code.</li>
+<li>The quality of the code I produced got better after reviewing and refactoring a lot of code and discussing it with my team’s programmers.</li>
+<li>My debugging skills got better by debugging many problems and going through bug reports.</li>
+<li>I learned the basics of using Unit Tests and NUnit framework.</li>
+</ul>
+<h1 id="scrum-master">Scrum Master</h1>
+<p>As the team’s Scrum Master I set myself the following learning goals:</p>
+<ul>
+<li>To get more confidence acting in the SM role</li>
+<li>To put to use the skills I learned about project management in a previous project</li>
+<li>To try to find the best practices suitable for our team</li>
+</ul>
+<h2 id="ceremonies-and-artifacts">Ceremonies and Artifacts</h2>
+<p>We selected the Scrum as our agile project management framework because we were already familiar with it based on our previous project. I was in charge of the process and facilitated the following Scrum Ceremonies and Artifacts</p>
+<h3 id="project-plan">Project Plan</h3>
+<p>In Co-operation with my team, I laid out a plan how the management of the project was going to be handled and how we were going to operate following the Scrum. I also updated the plan when it was necessary.</p>
+<h3 id="product-backlog">Product Backlog</h3>
+<p>In collaboration with the team’s Product Owner, we maintained the project’s Product Backlog in <em>Open Project</em> project management software. We had User Stories that were prioritized in order of importance and relevance to the current scope. Anyone in the team could add new User Stories, but it was finally the Product Owner’s responsibility to decide what were the top priorities. In practice we usually updated our Product Backlog when the current Sprint was ending and during Planning Days.</p>
+<h3 id="planning-days">Planning Days</h3>
+<p>I facilitated our Planning Days. Our Sprints were two weeks of length so that was our timeframe to plan things ahead in detail. Overall we succeeded decently at planning our Sprints.</p>
+<p>However, the trend was in the side that we had a bit too much to do per Sprint than what was realistic without doing overtime. Another problem was that I could not keep the team motivated to participate in the planning actively enough. This ended up in the situation that the planning sessions were a bit restless and people were working on their computers at the same time.</p>
+<p>On the positive side though we did manage to identify the tasks that were included in each of the Stories quite successfully and also our Sprints pretty much followed the plan we laid out during Planning Days.</p>
+<h3 id="sprint-backlog">Sprint Backlog</h3>
+<p>First, our plan was to keep our Sprint Backlog also in the <em>Open Project</em> software so we could make tasks in there, estimate Story Points for the User Stories, keep track of hour estimates and consumed hours for the Tasks and get a Burndown Chart out of the software. We tried this in our first two Sprints. And it didn’t work as well as I hoped.</p>
+<p>Problem was that no one of the team paid much attention to it because the software was somewhat clumsy to use, so our Sprint Backlog didn’t keep up to date. It was also difficult for me to get a sense of the whole picture out of it and the Burndown Chart wasn’t what I wanted it to be. So the conclusion was that it didn’t serve our purpose.</p>
+<p>In the third Sprint, we abandoned it all altogether as our Sprint Backlog platform and moved in a more traditional solution that was a flip chart, marker pen, and Post-it Notes. It ended up working great. We could see the whole picture all the time and people were active to move the Tasks from Todo state to Doing and Done states.</p>
+<figure>
+<img src="images/sprint-backlog.jpg" alt="An example of our Sprint Backlog" /><figcaption>An example of our Sprint Backlog</figcaption>
+</figure>
+<p>During the planning of our second Sprint, the team wanted to try to give up on the Tasks hour estimates. I agreed that we could try it. It turned out working fine and in the consequence of that we ended up paying more attention to the Story Point estimates. We used a scale of working days per Story where one point was equal to one person’s day of work. This kept the estimates accurate enough without frustrating the team too much.</p>
+<h3 id="daily-scrums">Daily Scrums</h3>
+<p>I held short daily meetings during mornings when everyone had arrived to work. During those meetings, everyone could tell others what they had done the previous day and what they would do next. Also if we had any issues blocking our progress we could share them. The Daily Scrums helped keep the whole team on track and aware of the current progress. If any of the team members were working remotely they would share the same things in our Slack channel.</p>
+<h3 id="sprint-demos">Sprint Demos</h3>
+<p>We had Sprint Demos every other Sprint officially for all the game development teams together where we presented our accomplishment to others and to the Evaluation Group. The other times our Demos consisted of the team and anyone interested playing our current build and summing up what we had achieved compared to the Sprint Goal.</p>
+<h3 id="retrospectives">Retrospectives</h3>
+<p>In the end of every Sprint, I hosted a Retrospective meeting for our team. I tried to create a relaxed situation where everyone could share their opinion of what conventions and activities we have that work and support our progress and in what part we could improve our procedures.</p>
+<p>In every Retrospective, we managed to identify some issues and also some things that were doing well. I was glad that we could also improve in the following Sprints on some of the issues.</p>
+<p>One problem we had during our first Retrospectives was that some team members didn’t express their opinion very clearly. I tried to think of the way I could encourage them to share their thoughts and ended up asking them to first write down in Post-it Notes at least one thing of each category. This practice ended up working well for us and people participated more actively in bringing up their opinions.</p>
+<h2 id="learning-outcomes-1">Learning Outcomes</h2>
+<p>My learning outcomes considering the Scrum process and acting as the project’s Scrum Master were:</p>
+<ul>
+<li>I learned that it is more effective to motivate team members with carrots than with sticks.</li>
+<li>I learned to adhere to the agile principle of improving and adapting the process constantly and making even big changes to the conventions if it benefits the team and improves the team’s capability to produce better results.</li>
+<li>Scrum Master’s role is certainly not easy but the process of learning it is rewarding.</li>
+</ul>
+<div id="footer">
+	&copy; 2018 Jarmo Syvälahti </br>
+	writted in Markdown, converted with Pandoc
+</div>
+</body>
+</html>
